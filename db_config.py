@@ -6,10 +6,10 @@ from datetime import datetime
 app = Flask(__name__)
 #db configuation
 app.secret_key = 'your secret key'
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'barathg'
-app.config['MYSQL_DB'] = 'dummy_mail'
+app.config['MYSQL_HOST'] = 'remotemysql.com'
+app.config['MYSQL_USER'] = 'YJhCmVseWc'
+app.config['MYSQL_PASSWORD'] = 'qowlYr4pay'
+app.config['MYSQL_DB'] = 'YJhCmVseWc'
 
 mysql = MySQL(app)
 
