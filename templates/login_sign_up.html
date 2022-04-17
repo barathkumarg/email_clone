@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Login and Register</title>
+      <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+       <script src="https://code.jquery.com/jquery-3.5.1.js"
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+          crossorigin="anonymous"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <body>
+      <div class="wrapper">
+         <div class="title-text">
+            <div class="title login">
+               Login
+            </div>
+            <div class="title signup">
+               Signup
+            </div>
+         </div>
+         <div class="form-container">
+            <div class="slide-controls">
+               <input type="radio" name="slide" id="login" checked>
+               <input type="radio" name="slide" id="signup">
+               <label for="login" class="slide login">Login</label>
+               <label for="signup" class="slide signup">Signup</label>
+               <div class="slider-tab"></div>
+            </div>
+            <div class="form-inner">
+               <form id="login_form" method="post" class="login">
+
+                  <div class="field">
+
+                     <input type="email" id ="email" placeholder="Email: aa@dummymail.com" required>
+
+
+                  </div>
+
+                  <div class="field">
+
+                     <input type="password" id = "password" placeholder="Password" required>
+                  </div>
+
+                  <div class="field btn">
+                     <div class="btn-layer"></div>
+                     <input type="submit" value="Login">
+                  </div>
+                  <div class="signup-link">
+                     Not a member? <a href="">Signup now</a>
+                  </div> <br><br>
+
+                  <div class="text-align:center;font-size:18px">
+                     <center>dummymail.com<br>
+                     <br> Meaner * &nbsp;&nbsp; Learner * &nbsp;&nbsp; Stronger</center>
+                  </div>
+
+
+
+               </form>
+               <form id="register_form" class="signup">
+                  <div class="field">
+                     <input type="text" id="reg_username" placeholder="Username" required>
+                  </div>
+
+                  <div class="field">
+
+                     <input type="text" id="reg_mail" placeholder="Email Address" onkeyup="checkmail()" required />
+                  </div>
+                  <span id ="message1" style="color:red"></span>
+                  <div class="field">
+                     <input type="password" id="reg_password" placeholder="Password" onkeyup="allpwd()" required>
+                  </div>
+                  <span id ="message2" style="color:red"></span>
+                  <div class="field">
+                     <input type="password" id="reg_con_password" placeholder="Confirm password" onkeyup="check();" required>
+                  </div>
+                  <span id ="message3" style="color:red"></span>
+
+                  <div class="field">
+                     <input type="number" id ="reg_mobile" placeholder="Mobile No" onkeyup="allwhats();" required>
+                  </div>
+                   <span id ="message4" style="color:red"></span>
+                  <div class="field btn">
+                     <div class="btn-layer"></div>
+                     <input id ="reg_submit" type="submit" value="submit"/>
+
+
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <script>
+         const loginText = document.querySelector(".title-text .login");
+         const loginForm = document.querySelector("form.login");
+         const loginBtn = document.querySelector("label.login");
+         const signupBtn = document.querySelector("label.signup");
+         const signupLink = document.querySelector("form .signup-link a");
+         signupBtn.onclick = (()=>{
+           loginForm.style.marginLeft = "-50%";
+           loginText.style.marginLeft = "-50%";
+         });
+         loginBtn.onclick = (()=>{
+           loginForm.style.marginLeft = "0%";
+           loginText.style.marginLeft = "0%";
+         });
+         signupLink.onclick = (()=>{
+           signupBtn.click();
+           return false;
+         });
+      </script>
+
+
+
+
+   <script type="text/javascript">
+    $(document).on('submit','#login_form',function(e)
+    {
+    console.log(1);
+      e.preventDefault();
+      $.ajax({
+        type:'POST',
+        url:'/',
+        data:{
+          email:$("#email").val(),
+          password:$("#password").val()
+
+        }
+      })
+
+      .done(function(data) {
+        if (data.status=='success') {
+                  console.log("success")
+                  window.location.href = "/inbox";
+			      }
+
+
+			else  {
+              console.log ("error")
+              swal("Wrong Credentials !!", "Please check your Username and Password !", "error");
+
+
+			      }
+		});
+
+    });
+
+
+  </script>
+
+
+   <script type="text/javascript">
+    $(document).on('submit','#register_form',function(e)
+    {
+
+      e.preventDefault();
+      $.ajax({
+        type:'POST',
+        url:'/register',
+        data:{
+          username:$("#reg_username").val(),
+          mail:$("#reg_mail").val(),
+          password: $("#reg_password").val(),
+          mobile:$("#reg_mobile").val()
+
+        }
+      })
+
+      .done(function(data) {
+        if (data.status=='success') {
+
+                  swal("Registered !!", "Its time to login", "success");
+                  window.location.href = "/";
+			      }
+
+
+			else  {
+
+              swal("Erro occured!!", "Try again once", "error");
+
+
+			      }
+		});
+
+    });
+
+
+  </script>
+
+
+   <script>
+function checkmail(){
+var mailid = document.getElementById('reg_mail').value;
+
+var arr_mail = [];
+{% for i in mail_ids %}
+   var mail_id = '{{i}}';
+   arr_mail.push(mail_id)
+{% endfor %}
+
+for(var i=0;i<arr_mail.length;i++){
+      if(arr_mail[i] != mailid && mailid.includes('@dummymail.com') ){
+      console.log(arr_mail[i]);
+         document.getElementById('reg_submit').disabled = false;
+         document.getElementById('message1').style.color = 'green';
+         document.getElementById('message1').innerHTML = 'Email accepted';
+
+      }
+      else{
+         document.getElementById('reg_submit').disabled = true;
+         document.getElementById('message1').style.color = 'red';
+         document.getElementById('message1').innerHTML = 'Already Taken or incorrect';
+         break;
+      }
+
+
+}
+
+
+}
+   </script>
+
+<script>
+function allpwd()
+      {
+	  var inputpwd = document.getElementById('reg_password');
+
+      var pwd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,12}$/;
+      if(inputpwd.value.match(pwd))
+      {
+
+	   document.getElementById('message2').innerHTML = '';
+	    document.getElementById('reg_submit').disabled = false;
+
+      }
+      else
+      {
+	  document.getElementById('message2').style.color = 'red';
+
+	   document.getElementById('message2').innerHTML = 'Password must contain minimum 8 characters with 1 lowercase,uppercase and number';
+      document.getElementById('reg_submit').disabled = true;
+      }
+      }
+</script>
+
+     <script>
+    var check = function () {
+      if (document.getElementById('reg_password').value ==
+        document.getElementById('reg_con_password').value    && document.getElementById('reg_password').value!=null) {
+        document.getElementById('message3').style.color = 'green';
+        document.getElementById('message3').innerHTML = 'Password matching';
+      } else {
+        document.getElementById('message3').style.color = 'red';
+        document.getElementById('message3').innerHTML = 'Password not matching';
+      }
+      if (document.getElementById('reg_password').value ==
+        document.getElementById('reg_con_password').value) {
+        document.getElementById('reg_submit').disabled = false;
+      } else {
+        document.getElementById('reg_submit').disabled = true;
+      }
+    }
+
+
+  </script>
+
+   <script>
+function allwhats()
+      {
+	  var inputwhats = document.getElementById('reg_mobile');
+
+      var whatsapp = /^[6789][0-9]{9}$/;
+      if(inputwhats.value.match(whatsapp))
+      {
+
+	   document.getElementById('message4').innerHTML = '';
+	    document.getElementById('reg_submit').disabled = false;
+
+      }
+      else
+      {
+	  document.getElementById('message4').style.color = 'red';
+
+	   document.getElementById('message4').innerHTML = 'Enter Valid Mobile no';
+      document.getElementById('reg_submit').disabled = true;
+      }
+      }
+</script>
+
+
+   </body>
+</html>

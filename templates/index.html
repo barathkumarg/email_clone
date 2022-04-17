@@ -1,0 +1,263 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+       <script src="https://code.jquery.com/jquery-3.5.1.js"
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+          crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{url_for('static',filename='inbox.css')}}">
+  <title>Dummymail.com</title>
+  </head>
+
+  <!------ Include the above in your HEAD tag ---------->
+  <body>
+    <div class="">
+      <link
+        rel="stylesheet prefetch"
+        href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+      />
+      <div class="mail-box">
+        <aside class="sm-side">
+          <div class="user-head">
+            <a class="inbox-avatar" href="javascript:;">
+              <img
+                width="64"
+                height="60"
+                src="{{url_for('static',filename='dummy_mail.png')}}"
+              />
+            </a>
+            <div class="user-name">
+              <h5><a href="#">{{account[1]}}</a></h5>
+              <span><a href="#">{{account[0]}}</a></span>
+            </div>
+
+          </div>
+          <div class="inbox-body">
+            <button
+              id="compose"
+              data-toggle="modal"
+              data-target="#myModal"
+              title="Compose"
+              class="btn btn-compose"
+            >
+              Compose
+            </button>
+            <!-- Modal -->
+            <div
+              aria-hidden="true"
+              aria-labelledby="myModalLabel"
+              role="dialog"
+              tabindex="-1"
+              id="myModal"
+              class="modal fade"
+              style="display: none"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button
+                      aria-hidden="true"
+                      data-dismiss="modal"
+                      class="close"
+                      type="button"
+                    >
+                      ×
+                    </button>
+                    <h4 class="modal-title">Compose</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form role="form" class="form-horizontal" id="send_mail" method="post">
+                      <div class="form-group">
+                        <label class="col-lg-2 control-label">To </label>
+                        <div class="col-lg-10">
+                          <input
+
+                            type="text"
+                            placeholder=""
+                            id="inputemail"
+                            class="form-control"
+                            onkeyup="checkmail()"
+                            required
+                          />
+                          <span id = "message1" style="color:red" ></span>
+                          <br>
+                           <span style="color:red;font-size:12px;">Comma seperator to send mutiple user</span>
+                        </div>
+
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-lg-2 control-label">Subject</label>
+                        <div class="col-lg-10">
+                          <input
+                            type="text"
+                            placeholder=""
+                            id="inputsubject"
+                            class="form-control"
+                            required
+
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-lg-2 control-label">Message</label>
+                        <div class="col-lg-10">
+                          <textarea
+                            rows="10"
+                            cols="30"
+                            class="form-control"
+                            id="inputmessage"
+                            required
+                          ></textarea>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+<!--                          <span class="btn green fileinput-button">-->
+<!--                            <i class="fa fa-plus fa fa-white"></i>-->
+<!--                            <span>Attachment</span>-->
+
+<!--                          </span>-->
+<!--                          <input type="file" id="files" name="files[]" multiple />-->
+                          <br>
+                          <button class="btn btn-send" id="btn-submit" type="submit">
+                            Send
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+          </div>
+          <ul class="inbox-nav inbox-divider">
+            {% if title == "Inbox" %}
+            <li class="active">
+              {% else %}
+              <li>
+            {% endif %}
+              <a href="{{url_for('inbox')}}"
+                ><i class="fa fa-inbox"></i> Inbox
+                <span class="label label-danger pull-right">{% if count!=0 %}{{count}}{% endif %}</span></a
+              >
+            </li>
+             {% if title == "Sent Mail" %}
+            <li class="active">
+              {% else %}
+              <li>
+            {% endif %}
+              <a href="{{url_for('sent')}}"><i class="fa fa-envelope-o"></i> Sent Mail</a>
+            </li>
+             {% if title == "Star" %}
+            <li class="active">
+              {% else %}
+              <li>
+            {% endif %}
+              <a href="{{url_for('star')}}"><i class="fa fa-star-o"></i> Star</a>
+            </li>
+          </ul>  
+          
+
+
+        </aside>
+        <aside class="lg-side">
+          <div class="inbox-head">
+            <h3>{{title}}</h3>
+            <div class="pull-right position">
+
+                                  <button class="btn sr-btn" type="button" onclick="window.location='/logout';" style="background-color:red">Logout</button>
+                              </div>
+
+          </div>
+
+
+
+
+
+
+          <script type="text/javascript">
+    $(document).on('submit','#send_mail',function(e)
+    {
+    console.log(1);
+      e.preventDefault();
+      $.ajax({
+        type:'POST',
+        url:'/send_mail',
+         data:{
+          email:$("#inputemail").val(),
+          subject:$("#inputsubject").val(),
+          message:$("#inputmessage").val()
+        }
+      })
+
+      .done(function(data) {
+        if (data.status=='success') {
+
+                  swal("Sent !!", "Message sent", "success");
+                  window.location.href = "/inbox";
+			      }
+
+
+			else  {
+
+              swal("Erro occured!!", "Try again once", "error");
+
+
+			      }
+		});
+
+    });
+
+
+  </script>
+
+  <script>
+function checkmail(){
+var mailid = document.getElementById('inputemail').value;
+var parts = mailid.split(",");
+mailid = parts[parts.length - 1];
+console.log(mailid);
+
+var arr_mail = [];
+{% for i in mail_ids %}
+   var mail_id = '{{i}}';
+   arr_mail.push(mail_id)
+{% endfor %}
+
+for(var i=0;i<arr_mail.length;i++){
+      if(arr_mail[i] == mailid && mailid.includes('@dummymail.com') ){
+      console.log(arr_mail[i]);
+         document.getElementById('btn-submit').disabled = false;
+         document.getElementById('message1').style.color = 'green';
+         document.getElementById('message1').innerHTML = 'Mail sent';
+          break;
+      }
+      else{
+         document.getElementById('btn-submit').disabled = true;
+         document.getElementById('message1').style.color = 'red';
+         document.getElementById('message1').innerHTML = 'Email not found';
+
+      }
+
+
+}
+
+
+}
+   </script>
+
+
+

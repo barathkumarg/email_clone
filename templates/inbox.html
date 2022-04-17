@@ -1,0 +1,51 @@
+{% include 'index.html' %}
+<div class="inbox-body">
+
+            <table class="table table-inbox table-hover">
+              <tbody>
+              {% if inbox == [] %}
+              <tr class="read">
+                  <td style="text-align:center;">No messages found</td>
+              </tr>
+              {% else %}
+              {% for i in inbox %}
+                {% if i[10] == 0 %}
+
+                <tr class="unread">
+                 {% else %}
+
+                    <tr class="read" >
+
+                  {% endif %}
+                  {% if i[9] ==0 %}
+                  <td class="inbox-small-cells" onclick="window.location='/do_star/{{i[0]}}';"><i class="fa fa-star"></i></td>
+                  {% else %}
+                  <td id="star_remove" class="inbox-small-cells" onclick="window.location='/undo_star/{{i[0]}}';"><i class="fa fa-star inbox-started"></i></td>
+                  {% endif %}
+                  <td class="view-message dont-show">{% if i[1] == i[2] %} me {% else %}{{i[3]}}{% endif %}</td>
+                  <td class="view-message" onclick="window.location='/view_message_inbox/{{i[0]}}';">
+                      {{i[4]}}
+                  </td>
+                  <td class="view-message inbox-small-cells">
+                      {% if i[6] != None %}
+                    <i class="fa fa-paperclip"></i>
+                      {% endif %}
+                  </td>
+                  <td class="inbox-small-cells" onclick="window.location='/delete_inbox/{{i[0]}}';">
+                    <i class="fa fa-trash"></i>
+                  </td>
+                  <td class="view-message text-right">{{i[8]}}</td>
+                </tr>
+
+              {% endfor %}
+              {% endif %}
+
+              </tbody>
+            </table>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
+

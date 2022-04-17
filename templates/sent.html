@@ -1,0 +1,43 @@
+{% include 'index.html' %}
+<div class="inbox-body">
+
+            <table class="table table-inbox table-hover">
+              <tbody>
+              {% if inbox == [] %}
+              <tr class="read">
+                  <td style="text-align:center;">No messages found</td>
+              </tr>
+              {% else %}
+              {% for i in inbox %}
+                <tr class="read" >
+
+                  <td class="inbox-small-cells"></td>
+
+                  <td class="view-message dont-show">To:{{i[3]}}</td>
+                  <td class="view-message" onclick="window.location='/view_message_sent/{{i[0]}}';">
+                      {{i[4]}}
+                  </td>
+                  <td class="view-message inbox-small-cells">
+                      {% if i[6] != None %}
+                    <i class="fa fa-paperclip"></i>
+                      {% endif %}
+                  </td>
+                  <td class="inbox-small-cells" onclick="window.location='/delete_sent/{{i[0]}}';">
+                    <i class="fa fa-trash"></i>
+                  </td>
+                  <td class="view-message text-right">{{i[8]}}</td>
+                </tr>
+              {% endfor %}
+              {% endif %}
+
+              </tbody>
+            </table>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
+
+</body>
+</html>

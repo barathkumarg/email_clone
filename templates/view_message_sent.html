@@ -1,0 +1,36 @@
+{% include 'index.html' %}
+<div class="inbox-body" style="margin:10px;height: 85vh;">
+            <div id="mail-subject">
+                <h3 style="padding:0px;margin:0px;margin-left:40px">{{message[4]}}</h3>
+            </div>
+            <div id="mail-id-holder">
+                <div id="mail-id">
+                    <h4>Me</h4>
+                    <p>{{message[1]}} to {{message[3]}}</p>
+                </div>
+                <div id="mail-time">
+                    <p>{{message[8]}}</p>
+                </div>
+
+            </div>
+            <!-- mail content -->
+            <div id="mail-content">
+                <p id="mail-content-text">
+                    {{message[5]}}
+                </p>
+<!--                <div class="display-attachment">-->
+<!--                    <h4>Attachments</h4>-->
+<!--                    <br />-->
+<!--                    <a href="#">File 1</a>-->
+<!--                </div>-->
+            </div>
+          </div>
+          <!-- end of main body -->
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
+
+</body>
+</html>
