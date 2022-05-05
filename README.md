@@ -34,3 +34,21 @@ Debugger PIN: 716-674-243
 Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 On the clicking the url your website will be locally hosted in your web browser.
 Python Packages to be installed and commands
+
+
+# Screen Shots
+![image](https://user-images.githubusercontent.com/53963652/166944055-3d21b12f-719e-4d29-8f19-b306dac0bd67.png)
+
+![image](https://user-images.githubusercontent.com/53963652/166944303-49fc4a29-0141-465d-aeb7-d2f3b7915068.png)
+
+![image](https://user-images.githubusercontent.com/53963652/166945617-ae3cfd4b-a6d0-4558-8227-bbe2da132f9e.png)
+
+![image](https://user-images.githubusercontent.com/53963652/166945793-b097f3dd-c5ab-4760-852f-9517a11b1ce0.png)
+
+![image](https://user-images.githubusercontent.com/53963652/166945891-3c622319-d3d5-4426-86f6-f32197b327d5.png)
+
+![image](https://user-images.githubusercontent.com/53963652/166945989-1fbff3c5-f24d-4046-b76c-cc11cdd9a500.png)
+
+![image](https://user-images.githubusercontent.com/53963652/166946158-134fb389-c38c-4941-b850-4d8db41ed3d4.png)
+
+![image](https://user-images.githubusercontent.com/53963652/166946255-4bb77f50-eef3-422e-8d02-ea584d144092.png)
