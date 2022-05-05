@@ -18,7 +18,7 @@ Heroku Cloud
 
 # Working
 
-1.Make sure that you have installed python and any one ide for python [Anaconda spyder, pycharm] in your Computer and php myadmin to connect the db
+1.Make sure that you have installed python and any one ide for python [Anaconda spyder, pycharm] in your Computer and php myadmin to connect the db, use the dummy_mail.sql file for db schema
 
 2.Download code from github
 
